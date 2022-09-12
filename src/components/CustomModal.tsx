@@ -10,6 +10,8 @@ import ModalController, { CustomModalRef } from './ModalController';
 
 const CustomModal = () => {
 	const [modalVisible, setModalVisible] = useState(false);
+    const [customMessage, setCustomMessage] = useState("");
+
 	const modalRef = useRef<CustomModalRef>();
 
     useLayoutEffect(() => {
@@ -19,11 +21,17 @@ const CustomModal = () => {
 	useImperativeHandle(
 		modalRef,
 		() => ({
-			show: () => {
+			show: (message?: string) => {
 				setModalVisible(true);
+                if(message) {
+                    setCustomMessage(message)
+                }
 			},
 			hide: () => {
 				setModalVisible(false);
+                if(customMessage.length > 0) {
+                    setCustomMessage("");
+                }
 			},
 		}),
 		[]
@@ -36,16 +44,16 @@ const CustomModal = () => {
 			visible={modalVisible}
 			onRequestClose={() => {
 				Alert.alert('Modal has been closed.');
-				setModalVisible(!modalVisible);
+				ModalController.hideModal()
 			}}
 		>
 			<View style={styles.centeredView}>
 				<View style={styles.modalView}>
 					<Text style={styles.modalText}>Hello World!</Text>
-                    {/* <Text style={styles.modalText}>{customMessage}</Text> */}
+                    {customMessage ? <Text style={styles.modalText}>{customMessage}</Text> : null}
 					<Pressable
 						style={[styles.button, styles.buttonClose]}
-						onPress={() => setModalVisible(!modalVisible)}
+						onPress={() => ModalController.hideModal()}
 					>
 						<Text style={styles.textStyle}>Hide Modal</Text>
 					</Pressable>

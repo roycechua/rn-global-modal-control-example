@@ -1,7 +1,7 @@
 import { MutableRefObject } from "react";
 
 export type CustomModalRef = {
-    show: () => void
+    show: (message?: string) => void
     hide: () => void
 }
 
@@ -11,9 +11,9 @@ export default class ModalController {
         this.modalRef = ref
     }
 
-	static showModal = () => {
+	static showModal = (message?: string) => {
         console.log("show modal")
-		this.modalRef.current?.show();
+		this.modalRef.current?.show(message);
 	};
     static hideModal = () => {
         console.log("hide modal")

@@ -13,7 +13,7 @@ const ProfileScreen = (props: Props) => {
 			<Text>ProfileScreen</Text>
             <Button title='Go to Home Screen' onPress={() => navigation.navigate("Home")} />
             <View style={{margin:5}} />
-            <Button title='Open Modal' color={'#F41919'} onPress={() => {ModalController.showModal()}} />
+            <Button title='Open Modal' color={'#F41919'} onPress={() => {ModalController.showModal("Welcome to the Profile Screen")}} />
 		</View>
 	);
 };
