@@ -29,9 +29,7 @@ const CustomModal = () => {
 			},
 			hide: () => {
 				setModalVisible(false);
-                if(customMessage.length > 0) {
-                    setCustomMessage("");
-                }
+                setCustomMessage("");
 			},
 		}),
 		[]
@@ -44,7 +42,7 @@ const CustomModal = () => {
 			visible={modalVisible}
 			onRequestClose={() => {
 				Alert.alert('Modal has been closed.');
-				ModalController.hideModal()
+				ModalController.hideModal();
 			}}
 		>
 			<View style={styles.centeredView}>
